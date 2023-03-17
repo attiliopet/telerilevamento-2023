@@ -62,6 +62,33 @@ plot(l2011[[4]], col=cli)
 # se voglio fare un nuovo multiframe ma formato con un numero differente di righe o colonne devo prima chiudere il multiframe preceedentemente aperto che se no lui mi rimane in quella modalità
 # chiudo la modalità multiframe precentemente usata, usando la funzione dev.off()
 
+#componenti rgb = RGB plotting
+# facciamo un'immagine a colori naturali
+# funzione utilizzata è plotRGB()
+# funzione più ? per avere info sulla funzione
+# stretch="lin" mi permette di allungare le bande di riflettanza
+plotRGB(l2011, r=3, g=2, b=1, stretch="lin")
+# infrarosso è la banda che mi permette più di indentificare la vegetazine che ha una maggiore riflettanza
+# devo aggungere una quarta banda per l'infrarosso
+plotRGB(l2011, r=4, g=3, b=2, stretch="lin")# assegno la banda dell'infrarosso al colore rosso ma perdo la banda del blu. in totale posso soltanto vedere 3 bande perchè RGB
+# plotRGB(l2011, r=3, g=2, b=4, stretch="lin") per vedere in suolo nudo in giallo
+par(mfrow=c(2,1)) # per mettere più immagini nello stesso plot 
+plotRGB(l2011, r=3, g=2, b=1, stretch="lin")
+plotRGB(l2011, r=3, g=4, b=2, stretch="lin")
+
+# Histogram strectching, mi permette uno stretch per istogrammi che è molto maggiore
+plotRGB(l2011, r=4, g=3, b=2, stretch="Hist") # lo strecth per istogrammi ha molte più informazioni rispetto a quello lineare
+
+
+
+
+
+
+
+
+
+
+
 
 
 
