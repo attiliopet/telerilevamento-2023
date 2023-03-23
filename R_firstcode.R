@@ -80,6 +80,15 @@ plotRGB(l2011, r=3, g=4, b=2, stretch="lin")
 plotRGB(l2011, r=4, g=3, b=2, stretch="Hist") # lo strecth per istogrammi ha molte più informazioni rispetto a quello lineare
 
 
+l2011 # per avere informazioni sul dato, datum è info per recuperare dal geoide
+
+# Exercise: plot the NIR band
+#scarico la cartella del 1988 e faccio la stessa cosa di quella del 2011
+#multiframe
+#metto in colonna le due immagini per vedere la differenza
+par(mfrow=c(2,1)) #due righe una colonna
+
+
 
 
 
