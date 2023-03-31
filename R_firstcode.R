@@ -102,3 +102,5 @@ par(mfrow=c(2,1)) #due righe una colonna
 
 
 
+
+
