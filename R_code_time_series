@@ -1,0 +1,25 @@
+library(raster)
+setwd("C:/lab/greenland")
+lst_2000 <- raster("lst_2000.tif")
+plot(lst_2000)
+
+rlist <- list.files(pattern="lst") # pattern mi permette di importare tutte le immagini con lo stesso nome
+import <- lapply(rlist, raster) # lapply importo vero e prorpio le immagini della lista in raster
+import # così le importo  
+
+TGr <- stack(import) # simile a par, mi mette tutte insieme le immagini che avevo caricato 
+TGr
+plot(TGr)
+
+plotRGB(TGr, 1, 2, 3, stretch="Lin") # si accosta di più all'immagine blu perchè ritroviamo l'immagine blu ed è quella che abbiamo accostato al blu
+# possiamo fare una differnza tra le diverse immagini per esempio dove la temperatura è aumentata, 2005 meno 2000 
+#differenza 
+dift = TGr[[2]] - TGr[[1]]
+dift <- TGr[[2]] - TGr[[1]]
+plot(dift)
+
+# levelplot(TGr)
+cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
+plot(TGr, col=cl)
+
+
