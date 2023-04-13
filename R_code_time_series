@@ -23,3 +23,44 @@ cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
 plot(TGr, col=cl)
 
 
+# European NO2
+library(raster)
+setwd("C:/lab/en")
+
+#importing a file
+en01 <- raster("EN_0001.png") #raster o brick per poter importare file
+cl <- colorRampPalette(c('red','orange','yellow'))(100) #
+plot(en01, col=cl)
+
+# per importare tutti i file insieme possiamo utilizzare la funzione lapply
+#dobbiamo faare una lista che hanno lo stesso nome iniziale, elementi in comune nel nome
+#dopo di che utilizziamo la funzione lapply in raster che le importa
+# facciamo infine uno stack che le compatta in un unico oggetto, ogni immagine è un elemento di un unic stack
+rlist <- list.files(pattern="EN")
+rimp <- lapply(rlist, raster)
+en <- stack(rimp)
+plot(en, col=cl)
+
+# per verificare che veramente la  prima immagine sia il primo file della cartella, metto vicino le due immagini e controllo se sono uguali
+par(mfrow=c(1,2))
+plot(en01, col=cl)
+plot(en[[1]], col=cl)
+
+# seconda verifica faccio la sottrazione tra le due immagine e deve venire ugule a zero
+
+
+#differenza tra la prima immagine meno l'ultima immagine mettendo la colorrampalette diversa
+difen <-  en[[1]] - en[[13]]
+cldif <- colorRampPalette(c('blue','white','red'))(100) #
+plot(difen, col=cldif)
+
+# fare un plot con diverse rgb la prima in rosso l'immagine centale (la settima) in verde e l'ultima in blu i valori piu alti
+#così da montare più immagini una su l'altra con colori indicativi
+plotRGB(en, r=1, g=7, b=13, stretch="lin")
+plotRGB(en, r=1, g=7, b=13, stretch="hist") #aumento lo stretch
+
+
+
+
+
+
