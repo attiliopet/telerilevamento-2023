@@ -36,9 +36,37 @@ soclass # mi fa vedere il numero totale dei pixel
 percentages = frequencies * 100 /  tot
 
 
+# Grand Canyon 
+setwd("C:/lab/")
+gc <- brick("dolansprings_oli_2013088_canyon_lrg.jpg") # per importare l'immagine
+gc
+plotRGB(gc, r=1, g=2, b=3, stretch="lin")
+#immagine pesante possiamo fare una cosa, possiamo fare il ritaglio dell'immagine. 
+gcc <- crop(gc, drawExtent())#funzione ritaglio, dove saremo noi a mettere i vertici nell'immagine. cosa molto rozza.
 
+ncell(gcc)# per vedere il numero di pixel della nuova immagine
 
+# classificazione
+#1.Get values
+singlenr <- getValues(gcc) # catturare tutti i pixel e tabellare ogni pixel, valori ogni pixel. dataset di imput
+#2.Classificazione
+kcluster <- kmeans(singlenr, centers = 3)
+kcluster
+# 3. Set values
+gcclass <- setValues(gcc[[1]], kcluster$cluster) #riprende i date delle classi e le rimette sotto forma raster
+# usiamo il primo stato come layer stampo
+cl <- colorRampPalette(c('yellow','black','red'))(100)
+plot(gcclass, col=cl)
 
+# class 1 : sandstones
+# class 2 : conglomerets 
+# class 3 : volcanic rocks
+
+frequencies <- freq(gcclass)# quanti pixel c'è per ogni classe
+frequencies
+total <- ncell(gcclass)
+percentages <- frequencies *100 /total # valori quantitativi delle varie classi
+percentages 
 
 
 
